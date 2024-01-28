@@ -1,20 +1,18 @@
-import { useState } from 'react'
-import Header from './components/Header'
-import Footer from './components/Footer'
+import { ConnectKitProvider } from 'connectkit'
+import { WagmiConfig } from 'wagmi'
+import { AppLayout } from './components/ui/layouts'
+import { config } from './config/wagmi'
+import { Home } from './pages'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-
-      <>
-        <Header />
-        <main>Principal</main>
-        <Footer />
-      
-      
-      </>
-
+    <WagmiConfig config={config}>
+      <ConnectKitProvider mode="light">
+        <AppLayout>
+          <Home />
+        </AppLayout>
+      </ConnectKitProvider>
+    </WagmiConfig>
   )
 }
 
