@@ -382,4 +382,4 @@ export const blockmakerTokenABI = [
       type: "function",
     },
   ],
-];
+]
