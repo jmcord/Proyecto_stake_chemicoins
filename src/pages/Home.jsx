@@ -7,6 +7,7 @@ export default function Home() {
       <TokenBalance />
       <Owner />
       <TokenInfo />
+      <BuyTokens />
       <TransferTokensForm />
       
     </section>

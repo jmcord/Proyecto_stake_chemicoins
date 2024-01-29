@@ -11,7 +11,7 @@ export default function TransferTokensForm() {
     address: import.meta.env.VITE_TOKEN_CONTRACT_ADDRESS,
     abi: blockmakerTokenABI,
     functionName: 'buyChemicoins',
-    args: [to, BigInt(amount * 10 ** 18)]
+    args: [BigInt(amount * 10 ** 18)]
   })
 
   const { data: writeData, write } = useContractWrite(config)
