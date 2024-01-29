@@ -8,7 +8,7 @@ export default function Home() {
       <Owner />
       <TokenInfo />
       <TransferTokensForm />
-      <BuyTokens /> 
+      
     </section>
   )
 }
