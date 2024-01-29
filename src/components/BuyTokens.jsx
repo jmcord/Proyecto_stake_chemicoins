@@ -10,7 +10,7 @@ export default function TransferTokensForm() {
   const { config } = usePrepareContractWrite({
     address: import.meta.env.VITE_TOKEN_CONTRACT_ADDRESS,
     abi: blockmakerTokenABI,
-    functionName: 'transfer',
+    functionName: 'buyChemicoins',
     args: [to, BigInt(amount * 10 ** 18)]
   })
 
@@ -24,9 +24,7 @@ export default function TransferTokensForm() {
     hash: writeData?.hash
   })
 
-  const handlerToInputChange = (event) => {
-    setTo(event.target.value)
-  }
+
 
   const handlerAmountInputChange = (event) => {
     setAmount(event.target.value)
@@ -48,10 +46,9 @@ export default function TransferTokensForm() {
       <Title>TransferForm</Title>
 
       <form className="grid gap-4">
-        <TextInput type="text" placeholder="To" onChange={handlerToInputChange} />
         <TextInput type="number" placeholder="Amount" onChange={handlerAmountInputChange} />
         <Button disabled={!write || isTransactionLoading} onClick={() => write?.()} isLoading={isTransactionLoading}>
-          {isTransactionLoading ? 'Transfiriendo BM tokens...' : 'Transferir BM tokens'}
+          {isTransactionLoading ? 'Transfiriendo CHE tokens...' : 'Transferir CHE tokens'}
         </Button>
       </form>
     </section>

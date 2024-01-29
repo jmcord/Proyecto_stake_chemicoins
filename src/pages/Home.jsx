@@ -1,4 +1,4 @@
-import { TokenBalance, Owner, TokenInfo, TransferTokensForm }  from '../components'  //{ TokenBalance, Owner, TokenInfo, TransferTokensForm } from '../components'
+import { TokenBalance, Owner, TokenInfo, TransferTokensForm, BuyTokens }  from '../components'  //{ TokenBalance, Owner, TokenInfo, TransferTokensForm } from '../components'
 
 export default function Home() {
   return (
@@ -8,6 +8,7 @@ export default function Home() {
       <Owner />
       <TokenInfo />
       <TransferTokensForm />
+      <BuyTokens /> 
     </section>
   )
 }
