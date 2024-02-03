@@ -1,20 +1,19 @@
-import { Button, TextInput, Title } from './ui'
-import { useState, useEffect } from 'react'
-import { useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi'
-import { blockmakerTokenABI } from '../contracts/ABIs'
+import React, { useState } from 'react';
+import { Button, TextInput } from './ui';
+import { useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi';
+import { blockmakerTokenABI } from '../contracts/ABIs';
 
-export default function TransferTokensForm() {
-  const [to, setTo] = useState('')
-  const [amount, setAmount] = useState('')
-
+export default function BuyTokensForm() {
+  const [amount, setAmount] = useState('');
+  
   const { config } = usePrepareContractWrite({
     address: import.meta.env.VITE_TOKEN_CONTRACT_ADDRESS,
     abi: blockmakerTokenABI,
     functionName: 'buyChemicoins',
-    args: [BigInt(amount * 10 ** 18)]
-  })
+    args: [parseInt(amount)] // Convertir a entero la cantidad ingresada por el usuario
+  });
 
-  const { data: writeData, write } = useContractWrite(config)
+  const { data: writeData, write } = useContractWrite(config);
 
   const {
     isLoading: isTransactionLoading,
@@ -22,35 +21,34 @@ export default function TransferTokensForm() {
     isError: isTransactionError
   } = useWaitForTransaction({
     hash: writeData?.hash
-  })
+  });
 
+  const handleAmountInputChange = (event) => {
+    setAmount(event.target.value);
+  };
 
-
-  const handlerAmountInputChange = (event) => {
-    setAmount(event.target.value)
-  }
-
-  useEffect(() => {
-    if (isTransactionSuccess) {
-      setTo('')
-      setAmount('')
-      console.log('Transacción Completada!')
-    }
-    if (isTransactionError) {
-      console.log('Transacción Fallida!')
-    }
-  }, [isTransactionSuccess, isTransactionError])
+  const handleBuyTokens = () => {
+    write();
+  };
 
   return (
     <section className="bg-white p-4 border shadow rounded-md">
-      <Title>TransferForm</Title>
-
+      <h2>Buy Tokens</h2>
       <form className="grid gap-4">
-        <TextInput type="number" placeholder="Amount" onChange={handlerAmountInputChange} />
-        <Button disabled={!write || isTransactionLoading} onClick={() => write?.()} isLoading={isTransactionLoading}>
-          {isTransactionLoading ? 'Transfiriendo CHE tokens...' : 'Transferir CHE tokens'}
+        <TextInput
+          type="number"
+          placeholder="Amount"
+          value={amount}
+          onChange={handleAmountInputChange}
+        />
+        <Button
+          disabled={!write || isTransactionLoading}
+          onClick={handleBuyTokens}
+          isLoading={isTransactionLoading}
+        >
+          {isTransactionLoading ? 'Buying Tokens...' : 'Buy Tokens'}
         </Button>
       </form>
     </section>
-  )
+  );
 }
