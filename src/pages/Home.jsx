@@ -1,6 +1,8 @@
 import { TokenBalance, Owner, TokenInfo, TransferTokensForm, BuyTokens }  from '../components'  //{ TokenBalance, Owner, TokenInfo, TransferTokensForm } from '../components'
+import ClaimRewardsForm from '../components/ClaimRewardsForm'
 import MintTokensForm from '../components/MintTokens'
 import StakingForm from '../components/StakingForm'
+import UnstakeTokensForm from '../components/UnstakeTokensForm'
 
 export default function Home() {
   return (
@@ -13,6 +15,8 @@ export default function Home() {
       <BuyTokens />
       <TransferTokensForm />
       <StakingForm />
+      <UnstakeTokensForm />
+      <ClaimRewardsForm />
       
     </section>
   )
