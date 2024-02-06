@@ -1,5 +1,4 @@
 export const blockmakerTokenABI = [
-
     {
       inputs: [
         { internalType: "string", name: "_name", type: "string" },
@@ -270,6 +269,20 @@ export const blockmakerTokenABI = [
       inputs: [],
       name: "decimals",
       outputs: [{ internalType: "uint8", name: "", type: "uint8" }],
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      inputs: [{ internalType: "address", name: "account", type: "address" }],
+      name: "getRewardsBalance",
+      outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      inputs: [{ internalType: "address", name: "account", type: "address" }],
+      name: "getStakingBalance",
+      outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
       stateMutability: "view",
       type: "function",
     },
