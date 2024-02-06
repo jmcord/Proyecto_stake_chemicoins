@@ -3,6 +3,7 @@ import ClaimRewardsForm from '../components/ClaimRewardsForm'
 import MintTokensForm from '../components/MintTokens'
 import StakingForm from '../components/StakingForm'
 import StakingInfo from '../components/StakingInfo'
+import StakingInfoPrueba from '../components/StakingInfoPrueba'
 import UnstakeTokensForm from '../components/UnstakeTokensForm'
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
       <UnstakeTokensForm />
       <ClaimRewardsForm />
       <StakingInfo />
+      <StakingInfoPrueba />
       
     </section>
   )
