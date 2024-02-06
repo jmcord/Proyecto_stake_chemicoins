@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Title } from './ui';
+import { Title } from './ui';
 import { useContractRead } from 'wagmi';
 import { blockmakerTokenABI } from '../contracts/ABIs';
 
@@ -22,15 +22,13 @@ export default function StakingInfo({ account }) {
   });
 
   useEffect(() => {
-    console.log('Staking data received:', stakingData);
-    if (stakingData) {
+    if (stakingData !== undefined) {
       setStakingBalance(stakingData.toNumber());
     }
   }, [stakingData]);
 
   useEffect(() => {
-    console.log('Rewards data received:', rewardsData);
-    if (rewardsData) {
+    if (rewardsData !== undefined) {
       setRewardsBalance(rewardsData.toNumber());
     }
   }, [rewardsData]);
