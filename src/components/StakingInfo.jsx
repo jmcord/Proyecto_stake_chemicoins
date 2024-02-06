@@ -22,12 +22,14 @@ export default function StakingInfo({ account }) {
   });
 
   useEffect(() => {
+    console.log('Staking data received:', stakingData);
     if (stakingData) {
       setStakingBalance(stakingData.toNumber());
     }
   }, [stakingData]);
 
   useEffect(() => {
+    console.log('Rewards data received:', rewardsData);
     if (rewardsData) {
       setRewardsBalance(rewardsData.toNumber());
     }
