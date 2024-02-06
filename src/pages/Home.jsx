@@ -2,6 +2,7 @@ import { TokenBalance, Owner, TokenInfo, TransferTokensForm, BuyTokens }  from '
 import ClaimRewardsForm from '../components/ClaimRewardsForm'
 import MintTokensForm from '../components/MintTokens'
 import StakingForm from '../components/StakingForm'
+import StakingInfo from '../components/StakingInfo'
 import UnstakeTokensForm from '../components/UnstakeTokensForm'
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
       <StakingForm />
       <UnstakeTokensForm />
       <ClaimRewardsForm />
+      <StakingInfo />
       
     </section>
   )
