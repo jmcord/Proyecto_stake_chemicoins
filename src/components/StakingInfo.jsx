@@ -1,47 +1,57 @@
-import React, { useState, useEffect } from 'react';
-import { Title } from './ui';
+import React, { useState } from 'react';
 import { useContractRead } from 'wagmi';
 import { blockmakerTokenABI } from '../contracts/ABIs';
 
-export default function StakingInfo({ account }) {
-  const [stakingBalance, setStakingBalance] = useState(0);
-  const [rewardsBalance, setRewardsBalance] = useState(0);
+function StakingInfo() {
+  const [address, setAddress] = useState('');
+  const [stakingBalance, setStakingBalance] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const { data: stakingData } = useContractRead({
+  const { data: stakingData, loading: stakingLoading, error: stakingError, fetch: fetchStakingData } = useContractRead({
     address: import.meta.env.VITE_TOKEN_CONTRACT_ADDRESS,
     abi: blockmakerTokenABI,
-    functionName: 'stakingBalance',
-    args: [account]
+    functionName: 'getStakingBalance',
+    args: [address]
   });
 
-  const { data: rewardsData } = useContractRead({
-    address: import.meta.env.VITE_TOKEN_CONTRACT_ADDRESS,
-    abi: blockmakerTokenABI,
-    functionName: 'rewardsBalance',
-    args: [account]
-  });
-
-  useEffect(() => {
-    console.log("Staking Data:", stakingData); // Log staking data
-    if (stakingData !== undefined) {
-      setStakingBalance(stakingData.toNumber());
+  const handleFetchStakingBalance = async () => {
+    console.log("Fetching staking balance for address:", address); // Log address for debugging
+    setLoading(true);
+    try {
+      await fetchStakingData();
+      if (stakingData !== undefined) {
+        console.log("Staking Data:", stakingData); // Log staking data
+        setStakingBalance(stakingData.toNumber());
+      }
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
     }
-  }, [stakingData]);
-
-  useEffect(() => {
-    console.log("Rewards Data:", rewardsData); // Log rewards data
-    if (rewardsData !== undefined) {
-      setRewardsBalance(rewardsData.toNumber());
-    }
-  }, [rewardsData]);
+  };
 
   return (
-    <section className="bg-white p-4 border shadow rounded-md">
-      <Title>Staking Information</Title>
-      <div>
-        <p>Staking Balance: {stakingBalance}</p>
-        <p>Rewards Balance: {rewardsBalance}</p>
-      </div>
-    </section>
+    <div>
+      <label htmlFor="address">Address:</label>
+      <input
+        type="text"
+        id="address"
+        value={address}
+        onChange={(e) => setAddress(e.target.value)}
+      />
+      <button onClick={handleFetchStakingBalance} disabled={loading}>
+        {loading ? 'Loading...' : 'Fetch Staking Balance'}
+      </button>
+      {stakingError && <p>Error fetching staking balance: {stakingError.message}</p>}
+      {stakingBalance !== null && (
+        <div>
+          <p>Staking Balance:</p>
+          <input type="text" value={stakingBalance} readOnly />
+        </div>
+      )}
+    </div>
   );
 }
+
+export default StakingInfo;
