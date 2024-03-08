@@ -10,14 +10,14 @@ export default function StakingInfo({ account }) {
   const { data: stakingData } = useContractRead({
     address: import.meta.env.VITE_TOKEN_CONTRACT_ADDRESS,
     abi: blockmakerTokenABI,
-    functionName: 'getStakingBalance',
+    functionName: 'stakingBalance',
     args: [account]
   });
 
   const { data: rewardsData } = useContractRead({
     address: import.meta.env.VITE_TOKEN_CONTRACT_ADDRESS,
     abi: blockmakerTokenABI,
-    functionName: 'getRewardsBalance',
+    functionName: 'rewardsBalance',
     args: [account]
   });
 
