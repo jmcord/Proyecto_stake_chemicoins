@@ -15,8 +15,8 @@ export default function Home() {
   };
 
   return (
-    <section className="flex flex-col place-items-center gap-4 py-20 px-20">
-      <h1>Blockmaker ERC20 Token</h1>
+    <section className="flex flex-col place-items-center gap-4 py-20 px-20" style={{ backgroundImage: 'url("/ADA_description.png")', backgroundSize: 'cover', backgroundPosition: 'center', height: '100vh', alignItems: 'center', marginTop: '20vh' }}>
+      <h1>PigCOIN ERC20 Token</h1>
       {/* Tab navigation */}
       <div className="flex gap-4">
         <button onClick={() => handleTabChange('home')}>Home</button>
