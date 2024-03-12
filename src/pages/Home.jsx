@@ -4,6 +4,7 @@ import ClaimRewardsForm from '../components/ClaimRewardsForm';
 import MintTokensForm from '../components/MintTokens';
 import StakingForm from '../components/StakingForm';
 import StakingInfo from '../components/StakingInfo';
+import StakingRewards from '../components/StakingRewards';
 import UnstakeTokensForm from '../components/UnstakeTokensForm';
 import About from '../components/About'; // Import the About component
 
@@ -35,6 +36,7 @@ export default function Home() {
           <UnstakeTokensForm />
           <ClaimRewardsForm />
           <StakingInfo />
+          <StakingRewards />
         </>
       )}
       {tab === 'about' && <About />}
