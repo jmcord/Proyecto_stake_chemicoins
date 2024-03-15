@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'; // Importa PropTypes desde la biblioteca prop-types
 import Header from '../../Header';
 import Footer from '../../Footer';
-import backgroundImage from '/public/bc.png'; // Importa la imagen de fondo
+import backgroundImage from '/bc.png'; // Importa la imagen de fondo
 
 export default function AppLayout({ children }) {
   return (
