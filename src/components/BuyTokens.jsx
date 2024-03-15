@@ -8,10 +8,8 @@ export default function BuyTokensForm() {
   const [amount, setAmount] = useState('');
   const web3 = new Web3(window.ethereum); // Inicializa una instancia de Web3
 
-  // Agrega la dirección del contrato en la configuración
   const { config } = usePrepareContractWrite({
     address: import.meta.env.VITE_TOKEN_CONTRACT_ADDRESS,
-    to: '0xa4245BD68b73d81Eec64b4BF8C11DD5d386C8192', // Reemplaza '0xYourContractAddress' con la dirección real del contrato
     abi: blockmakerTokenABI,
     functionName: 'buyChemicoins',
     args: [parseInt(amount)] // Convertir a entero la cantidad ingresada por el usuario
@@ -37,21 +35,21 @@ export default function BuyTokensForm() {
       // Mostrar mensaje de error o alerta al usuario
       return;
     }
-
-    // Calcular el monto de ETH necesario para comprar los tokens (10% del monto de tokens)
-    const ethAmount = parseFloat(amount) * 0.1;
-
+  
+    // Calcular el monto de ETH necesario para comprar los tokens (0.01 ETH por token)
+    const ethAmount = parseFloat(amount) * 0.01;
+  
     try {
       // Solicitar al usuario que apruebe y envíe la cantidad de ETH necesaria a través de Metamask
       await window.ethereum.request({
         method: 'eth_sendTransaction',
         params: [{
-          to: config.to,
+          to: import.meta.env.VITE_TOKEN_CONTRACT_ADDRESS,
           from: window.ethereum.selectedAddress,
-          value: web3.utils.toWei(ethAmount.toString(), 'ether'), // Utiliza la función toWei de Web3 para convertir a wei
+          value: web3.utils.toHex(web3.utils.toWei(ethAmount.toString(), 'ether')), // Convertir a hexadecimal antes de enviar
         }],
       });
-
+  
       // Esperar a que el usuario envíe los ETH y luego llamar a la función del contrato para comprar los tokens
       await write();
     } catch (error) {
@@ -60,7 +58,7 @@ export default function BuyTokensForm() {
       // Mostrar un mensaje de error al usuario
     }
   };
-
+  
   return (
     <section className="bg-white p-4 border shadow rounded-md">
       <h2>Buy Tokens</h2>
