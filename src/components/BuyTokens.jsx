@@ -37,7 +37,7 @@ export default function BuyTokensForm() {
     }
 
     // Calcular el monto de ETH necesario para comprar los tokens (0.01 ETH por token)
-    const ethAmount = parseFloat(amount) * 0.01;
+    const ethAmount = parseFloat(amount) * 0.01; // Costo por token
 
     try {
       // Convertir el monto de ETH a wei
@@ -49,7 +49,7 @@ export default function BuyTokensForm() {
         params: [{
           to: "0x9825fb83bCe59639cb311238a535B6f952289450",
           from: window.ethereum.selectedAddress,
-          value: weiAmount, // No es necesario convertir a hexadecimal antes de enviar
+          value: weiAmount, // Cantidad de ETH necesaria
         }],
       });
 
