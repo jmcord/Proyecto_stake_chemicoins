@@ -212,7 +212,7 @@ export const blockmakerTokenABI = [
     },
     {
       inputs: [],
-      name: "MAX_SUPPLY",
+      name: "APY",
       outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
       stateMutability: "view",
       type: "function",
@@ -252,7 +252,9 @@ export const blockmakerTokenABI = [
       type: "function",
     },
     {
-      inputs: [{ internalType: "uint256", name: "amount", type: "uint256" }],
+      inputs: [
+        { internalType: "uint256", name: "tokensToBuy", type: "uint256" },
+      ],
       name: "buyChemicoins",
       outputs: [],
       stateMutability: "payable",
@@ -282,6 +284,13 @@ export const blockmakerTokenABI = [
     {
       inputs: [{ internalType: "address", name: "account", type: "address" }],
       name: "getStakingBalance",
+      outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      inputs: [{ internalType: "address", name: "", type: "address" }],
+      name: "lastRewardClaimTime",
       outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
       stateMutability: "view",
       type: "function",
