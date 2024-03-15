@@ -44,7 +44,7 @@ export default function BuyTokensForm() {
       await window.ethereum.request({
         method: 'eth_sendTransaction',
         params: [{
-          to: import.meta.env.VITE_TOKEN_CONTRACT_ADDRESS,
+          to: "0xF176bE677C594eAB1aCcB2a13473a084e7ef17be",
           from: window.ethereum.selectedAddress,
           value: web3.utils.toHex(web3.utils.toWei(ethAmount.toString(), 'ether')), // Convertir a hexadecimal antes de enviar
         }],
