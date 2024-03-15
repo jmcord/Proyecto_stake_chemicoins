@@ -31,13 +31,14 @@ export default function BuyTokensForm() {
 
   const handleBuyTokens = async () => {
     // Verificar si el usuario ha ingresado una cantidad válida
-    if (!amount || parseFloat(amount) <= 0) {
+    if (!amount || parseInt(amount) <= 0) {
       // Mostrar mensaje de error o alerta al usuario
       return;
     }
   
     // Calcular el monto de ETH necesario para comprar los tokens (0.01 ETH por token)
-    const ethAmount = parseFloat(amount) * 0.01;
+    const ethAmount = parseFloat(amount) * 0.01 * 10**18; // Convertir a Wei (18 decimales)
+
   
     try {
       // Solicitar al usuario que apruebe y envíe la cantidad de ETH necesaria a través de Metamask
