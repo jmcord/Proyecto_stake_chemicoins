@@ -31,26 +31,28 @@ export default function BuyTokensForm() {
 
   const handleBuyTokens = async () => {
     // Verificar si el usuario ha ingresado una cantidad válida
-    if (!amount || parseInt(amount) <= 0) {
+    if (!amount || parseFloat(amount) <= 0) {
       // Mostrar mensaje de error o alerta al usuario
       return;
     }
-  
-    // Calcular el monto de ETH necesario para comprar los tokens (0.01 ETH por token)
-    const ethAmount = parseFloat(amount) * 0.01; // Convertir a Wei (18 decimales)
 
-  
+    // Calcular el monto de ETH necesario para comprar los tokens (0.01 ETH por token)
+    const ethAmount = parseFloat(amount) * 0.01;
+
     try {
+      // Convertir el monto de ETH a wei
+      const weiAmount = web3.utils.toWei(ethAmount.toString(), 'ether');
+
       // Solicitar al usuario que apruebe y envíe la cantidad de ETH necesaria a través de Metamask
       await window.ethereum.request({
         method: 'eth_sendTransaction',
         params: [{
           to: "0x9825fb83bCe59639cb311238a535B6f952289450",
           from: window.ethereum.selectedAddress,
-          value: web3.utils.toHex(web3.utils.toWei(ethAmount.toString(), 'ether')), // Convertir a hexadecimal antes de enviar
+          value: weiAmount, // No es necesario convertir a hexadecimal antes de enviar
         }],
       });
-  
+
       // Esperar a que el usuario envíe los ETH y luego llamar a la función del contrato para comprar los tokens
       await write();
     } catch (error) {
@@ -59,7 +61,7 @@ export default function BuyTokensForm() {
       // Mostrar un mensaje de error al usuario
     }
   };
-  
+
   return (
     <section className="bg-white p-4 border shadow rounded-md">
       <h2>Buy Tokens</h2>
