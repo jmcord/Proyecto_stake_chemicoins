@@ -39,18 +39,22 @@ export default function BuyTokensForm() {
     // Calcular el monto de ETH necesario para comprar los tokens (0.01 ETH por token)
     const ethAmount = parseFloat(amount) * 0.01;
 
-    console.log('Cantidad de ETH a pedir:', ethAmount); // Mostrar la cantidad de ETH en la consola
+    // Convertir el monto de ETH a wei
+    const weiAmount = web3.utils.toWei(ethAmount.toString(), 'ether');
+
+    console.log('Valor de weiAmount:', weiAmount); // Mostrar el valor de weiAmount en la consola
 
     try {
-      // Convertir el monto de ETH a wei
-      const weiAmount = web3.utils.toWei(ethAmount.toString(), 'ether');
+      // Obtener la dirección seleccionada por el usuario en MetaMask utilizando eth_accounts
+      const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+      const from = accounts[0];
 
       // Solicitar al usuario que apruebe y envíe la cantidad de ETH necesaria a través de Metamask
       await window.ethereum.request({
         method: 'eth_sendTransaction',
         params: [{
           to: "0x9825fb83bCe59639cb311238a535B6f952289450",
-          from: window.ethereum.selectedAddress,
+          from: from,
           value: weiAmount, // No es necesario convertir a hexadecimal antes de enviar
         }],
       });
