@@ -79,7 +79,7 @@ export default function BuyTokensForm() {
           onChange={handleAmountInputChange}
         />
         <Button
-          disabled={!write || isTransactionLoading}
+          disabled={!write && isTransactionLoading}
           onClick={handleBuyTokens}
           isLoading={isTransactionLoading}
         >
