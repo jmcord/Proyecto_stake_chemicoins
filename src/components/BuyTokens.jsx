@@ -53,7 +53,7 @@ export default function BuyTokensForm() {
       await window.ethereum.request({
         method: 'eth_sendTransaction',
         params: [{
-          to: "0xF36aa47CA6a4565C6A433c6a573A19c66e3F6418",
+          to: "0x31bb91E968dF29218dEf6df0de783B83Cd7550Da",
           from: from,
           value: weiAmount, // No es necesario convertir a hexadecimal antes de enviar
         }],

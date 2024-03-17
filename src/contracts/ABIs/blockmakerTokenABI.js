@@ -262,6 +262,13 @@ export const blockmakerTokenABI = [
     },
     {
       inputs: [],
+      name: "buyChemicoins2",
+      outputs: [],
+      stateMutability: "payable",
+      type: "function",
+    },
+    {
+      inputs: [],
       name: "claimReward",
       outputs: [],
       stateMutability: "nonpayable",
