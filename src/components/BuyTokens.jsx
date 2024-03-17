@@ -43,7 +43,7 @@ export default function BuyTokensForm() {
     const weiAmount = web3.utils.toWei(ethAmount.toString(), 'ether');
 
     console.log('Valor de weiAmount:', weiAmount); // Mostrar el valor de weiAmount en la consola
-
+    console.log('Valor de weiAmount:', ethAmount); // Mostrar el valor de weiAmount en la consola
     try {
       // Obtener la dirección seleccionada por el usuario en MetaMask utilizando eth_accounts
       const accounts = await window.ethereum.request({ method: 'eth_accounts' });
@@ -53,7 +53,7 @@ export default function BuyTokensForm() {
       await window.ethereum.request({
         method: 'eth_sendTransaction',
         params: [{
-          to: "0x8639cF14A91619B1B2014c05EF26C9Ed695d3CfA",
+          to: "0xF36aa47CA6a4565C6A433c6a573A19c66e3F6418",
           from: from,
           value: weiAmount, // No es necesario convertir a hexadecimal antes de enviar
         }],

@@ -403,4 +403,5 @@ export const blockmakerTokenABI = [
       stateMutability: "nonpayable",
       type: "function",
     },
+    { stateMutability: "payable", type: "receive" },
 ];
