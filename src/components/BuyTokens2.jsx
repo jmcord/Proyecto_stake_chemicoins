@@ -45,14 +45,19 @@ export default function BuyTokensForm2() {
     console.log('Tokens to buy:', tokensToBuy); // Log the tokens to buy to the console
 
     try {
-      // Send transaction using MetaMask
+      // Send Ethereum to an address using MetaMask
       await window.ethereum.request({
-        method: 'eth_sendTransaction',
-        params: [{
-          from: window.ethereum.selectedAddress,
-          to: "0x31bb91E968dF29218dEf6df0de783B83Cd7550Da",
-          value: web3.utils.toWei(ethAmount, 'ether')
-        }],
+        method: "eth_sendTransaction",
+        params: [
+          {
+            from: window.ethereum.selectedAddress,
+            to: import.meta.env.VITE_TOKEN_CONTRACT_ADDRESS,
+            value: web3.utils.toWei(ethAmount, 'ether'),
+            gasLimit: '0x5028',
+            maxPriorityFeePerGas: '0x3b9aca00',
+            maxFeePerGas: '0x2540be400',
+          },
+        ],
       });
 
       // Wait for the user to send the ETH and then call the contract function to buy the tokens
