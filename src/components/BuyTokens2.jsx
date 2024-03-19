@@ -6,7 +6,7 @@ import Web3 from 'web3'; // Import Web3 library
 
 export default function BuyTokensForm2() {
   const [ethAmount, setEthAmount] = useState('');
-  const web3 = new Web3(window.ethereum); // Initialize Web3 instance
+  const web3 = new Web3(window.ethereum);
 
   // Prepare contract write configuration
   const { config } = usePrepareContractWrite({
@@ -45,22 +45,18 @@ export default function BuyTokensForm2() {
     console.log('Tokens to buy:', tokensToBuy); // Log the tokens to buy to the console
 
     try {
-      // Get the user's selected address in MetaMask using eth_accounts
-      const accounts = await window.ethereum.request({ method: 'eth_accounts' });
-      const from = accounts[0];
-      console.log( web3.utils.toWei(ethAmount, 'ether'))
-      // Request the user to approve and send the required ETH through MetaMask
+      // Send transaction using MetaMask
       await window.ethereum.request({
         method: 'eth_sendTransaction',
         params: [{
+          from: window.ethereum.selectedAddress,
           to: "0x31bb91E968dF29218dEf6df0de783B83Cd7550Da",
-          from: from,
-          value: web3.utils.toWei(ethAmount, 'ether') // Convert ETH amount to wei directly
+          value: web3.utils.toWei(ethAmount, 'ether')
         }],
       });
-      
+
       // Wait for the user to send the ETH and then call the contract function to buy the tokens
-      await write();
+      write();
     } catch (error) {
       // Handle any errors that occur during the process
       console.error('Error:', error);
