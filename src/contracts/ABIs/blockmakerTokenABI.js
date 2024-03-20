@@ -175,6 +175,31 @@ export const blockmakerTokenABI = [
       anonymous: false,
       inputs: [
         {
+          indexed: false,
+          internalType: "address",
+          name: "buyer",
+          type: "address",
+        },
+        {
+          indexed: false,
+          internalType: "uint256",
+          name: "amount",
+          type: "uint256",
+        },
+        {
+          indexed: false,
+          internalType: "uint256",
+          name: "tokensReceived",
+          type: "uint256",
+        },
+      ],
+      name: "TokensPurchased",
+      type: "event",
+    },
+    {
+      anonymous: false,
+      inputs: [
+        {
           indexed: true,
           internalType: "address",
           name: "from",
@@ -245,6 +270,13 @@ export const blockmakerTokenABI = [
       type: "function",
     },
     {
+      inputs: [],
+      name: "balanceTokensSC",
+      outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+      stateMutability: "view",
+      type: "function",
+    },
+    {
       inputs: [{ internalType: "uint256", name: "amount", type: "uint256" }],
       name: "burn",
       outputs: [],
@@ -263,6 +295,13 @@ export const blockmakerTokenABI = [
     {
       inputs: [],
       name: "buyChemicoins2",
+      outputs: [],
+      stateMutability: "payable",
+      type: "function",
+    },
+    {
+      inputs: [],
+      name: "buyTokens",
       outputs: [],
       stateMutability: "payable",
       type: "function",
