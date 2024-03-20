@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TokenBalance, Owner, TokenInfo, TransferTokensForm, BuyTokens2 } from '../components';
+import { TokenBalance, Owner, TokenInfo, TransferTokensForm, BuyTokens } from '../components';
 import ClaimRewardsForm from '../components/ClaimRewardsForm';
 import MintTokensForm from '../components/MintTokens';
 import StakingForm from '../components/StakingForm';
@@ -33,7 +33,7 @@ export default function Home() {
             <Owner />
             <TokenInfo />
             <MintTokensForm />
-            <BuyTokens2 />
+            <BuyTokens />
             <TransferTokensForm />
             <StakingForm />
             <UnstakeTokensForm />
