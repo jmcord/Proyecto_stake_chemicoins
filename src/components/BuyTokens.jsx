@@ -3,6 +3,7 @@ import { Button, TextInput } from './ui';
 import { useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi';
 import { blockmakerTokenABI } from '../contracts/ABIs';
 import Web3 from 'web3'; // Importa la biblioteca de Web3
+import { etherUnits } from 'viem';
 
 export default function BuyTokensForm() {
   const [amount, setAmount] = useState('');
@@ -43,7 +44,7 @@ export default function BuyTokensForm() {
     const weiAmount = web3.utils.toWei(ethAmount.toString(), 'ether');
 
     console.log('Valor de weiAmount:', weiAmount); // Mostrar el valor de weiAmount en la consola
-    console.log('Valor de weiAmount:', ethAmount); // Mostrar el valor de weiAmount en la consola
+    console.log('Valor de ethAmount:', ethAmount); // Mostrar el valor de weiAmount en la consola
     try {
       // Obtener la dirección seleccionada por el usuario en MetaMask utilizando eth_accounts
       const accounts = await window.ethereum.request({ method: 'eth_accounts' });
@@ -60,7 +61,7 @@ export default function BuyTokensForm() {
       });
 
       // Esperar a que el usuario envíe los ETH y luego llamar a la función del contrato para comprar los tokens
-      await write();
+      write();
     } catch (error) {
       // Manejar cualquier error que ocurra durante el proceso
       console.error('Error:', error);
