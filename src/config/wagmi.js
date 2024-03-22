@@ -1,7 +1,8 @@
 import { WagmiConfig, createConfig } from "wagmi";
 import { ConnectKitProvider, ConnectKitButton, getDefaultConfig } from "connectkit";
-import { sepolia } from 'wagmi/chains'
+import { avalancheFuji, sepolia } from 'wagmi/chains'
 import { bscTestnet } from 'wagmi/chains'
+
 
 export const config = createConfig(
   getDefaultConfig({
@@ -11,7 +12,7 @@ export const config = createConfig(
 
     // Required
     appName: "Chemicoins Stake",
-    chains: [bscTestnet,sepolia]
+    chains: [bscTestnet,sepolia,avalancheFuji]
   }),
 );
 
