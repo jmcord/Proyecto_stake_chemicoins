@@ -49,14 +49,15 @@ export default function BuyTokensForm() {
       // Obtener la dirección seleccionada por el usuario en MetaMask utilizando eth_accounts
       const accounts = await window.ethereum.request({ method: 'eth_accounts' });
       const from = accounts[0];
-
+      console.log(from)
       // Solicitar al usuario que apruebe y envíe la cantidad de ETH necesaria a través de Metamask
       await window.ethereum.request({
         method: 'eth_sendTransaction',
         params: [{
           to: import.meta.env.VITE_TOKEN_CONTRACT_ADDRESS,
           from: from,
-          value: weiAmount, // No es necesario convertir a hexadecimal antes de enviar
+          value: web3.utils.toWei(String(ethAmount),"ether"), // Convertir a string para evitar errores
+          gas: '50000' // Ajustar el gas según sea necesario
         }],
       });
 
